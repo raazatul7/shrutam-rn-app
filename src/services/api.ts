@@ -24,7 +24,6 @@ const apiClient: AxiosInstance = axios.create({
 apiClient.interceptors.request.use(
   (config) => {
     console.log('🌐 API Request:', config.method?.toUpperCase(), config.url);
-    console.log('📍 Base URL:', environment.BASE_URL);
     return config;
   },
   (error) => {
@@ -74,14 +73,10 @@ export const getTodaysQuote = async (): Promise<Quote> => {
     }
   } catch (error: any) {
     console.error('❌ Error fetching today\'s quote:', error);
-    console.error('🔗 Attempted URL:', `${environment.BASE_URL}/quote/today`);
-    console.error('📱 Platform: Android Emulator');
     
     // Check if it's a network connectivity issue
     if (error.code === 'NETWORK_ERROR' || error.message?.includes('Network Error')) {
       console.error('🌐 Network connectivity issue detected');
-      console.error('💡 Make sure your API server is running on port 3000');
-      console.error('💡 For Android emulator, use 10.0.2.2 instead of localhost');
     }
     
     // Try to return cached quote if API fails
@@ -160,15 +155,7 @@ export const getRecentQuotes = async (): Promise<Quote[]> => {
       console.error('Error retrieving cached quotes:', cacheError);
     }
     
-    // Re-throw as ApiError
-    if (error instanceof ApiError) {
-      throw error;
-    }
-    
-    throw new ApiError(
-      error.message || 'Network error occurred',
-      error.response?.status
-    );
+    return [];
   }
 };
 
