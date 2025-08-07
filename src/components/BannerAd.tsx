@@ -4,7 +4,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { View, StyleSheet, Platform } from 'react-native';
+import { View, StyleSheet, Platform, Text } from 'react-native';
 import { BannerAd, BannerAdSize, TestIds } from 'react-native-google-mobile-ads';
 
 import { getBannerAdUnitId } from '../config/ads';
@@ -16,23 +16,23 @@ interface BannerAdProps {
    * If not provided, uses the configured ad unit ID
    */
   adUnitId?: string;
-  
+
   /**
    * Optional custom banner size
    * Defaults to BANNER
    */
   size?: BannerAdSize;
-  
+
   /**
    * Optional custom styles
    */
   style?: any;
 }
 
-const BannerAdComponent: React.FC<BannerAdProps> = ({ 
-  adUnitId, 
+const BannerAdComponent: React.FC<BannerAdProps> = ({
+  adUnitId,
   size = BannerAdSize.BANNER,
-  style 
+  style
 }) => {
   const [adLoaded, setAdLoaded] = useState<boolean>(false);
   const [adError, setAdError] = useState<string | null>(null);
@@ -85,24 +85,24 @@ const BannerAdComponent: React.FC<BannerAdProps> = ({
         onAdOpened={onAdOpened}
         onAdClosed={onAdClosed}
       />
-      
+
       {/* Debug info in development */}
       {__DEV__ && (
         <View style={styles.debugInfo}>
           <View style={styles.debugItem}>
             <View style={[styles.statusIndicator, { backgroundColor: adLoaded ? theme.colors.success : theme.colors.error }]} />
             <View style={styles.debugText}>
-              <View style={styles.debugLabel}>Status:</View>
+              <View style={styles.debugLabel}><Text>Status:</Text></View>
               <View style={styles.debugValue}>
-                {adLoaded ? 'Loaded' : adError ? 'Error' : 'Loading...'}
+                <Text>{adLoaded ? 'Loaded' : adError ? 'Error' : 'Loading...'}</Text>
               </View>
             </View>
           </View>
           {adError && (
             <View style={styles.debugItem}>
               <View style={styles.debugText}>
-                <View style={styles.debugLabel}>Error:</View>
-                <View style={styles.debugValue}>{adError}</View>
+                <View style={styles.debugLabel}><Text>Error:</Text></View>
+                <View style={styles.debugValue}><Text>{adError}</Text></View>
               </View>
             </View>
           )}
