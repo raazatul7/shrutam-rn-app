@@ -80,7 +80,7 @@ const TodayScreen: React.FC<Props> = () => {
       const captureMethod = shareViewRef.current?.capture;
       if (!captureMethod) {
         console.error('Capture method not available');
-        shareAsText();
+        // shareAsText();
         return;
       }
       
@@ -100,7 +100,7 @@ const TodayScreen: React.FC<Props> = () => {
       if (error.message !== 'User did not share') {
         console.error('Error sharing image:', error);
         // Fallback to text sharing if image fails
-        shareAsText();
+        // shareAsText();
       }
     }
   };

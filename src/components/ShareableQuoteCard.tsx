@@ -25,16 +25,12 @@ interface ShareableQuoteCardProps {
   showDate?: boolean;
 }
 
-const ShareableQuoteCard: React.FC<ShareableQuoteCardProps> = ({ 
-  quote, 
-  showDate = true 
+const ShareableQuoteCard: React.FC<ShareableQuoteCardProps> = ({
+  quote,
+  showDate = true
 }) => {
   return (
     <View style={styles.container}>
-      <LinearGradient
-        colors={[theme.colors.background, theme.colors.surface]}
-        style={styles.container}
-      >
         {/* Header with App Branding */}
         <View style={styles.header}>
           <View style={styles.brandContainer}>
@@ -89,19 +85,19 @@ const ShareableQuoteCard: React.FC<ShareableQuoteCardProps> = ({
             <Icon name="auto-stories" size={16} color={theme.colors.primary} />
           </View>
         </View>
-      </LinearGradient>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    width: 400,
-    minHeight: 600,
-    paddingVertical: theme.spacing.xl,
-    paddingHorizontal: theme.spacing.lg,
+    height: '100%',
+    width: '100%',
+    alignItems:'center',
+    justifyContent:'center',
+    paddingVertical: theme.spacing.md,
+    paddingHorizontal: theme.spacing.md,
     borderRadius: theme.borderRadius.lg,
-    alignSelf: 'center',
     backgroundColor: theme.colors.background,
   },
   header: {
