@@ -1,97 +1,196 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# 📿 Shrutam – Daily Wisdom from Ancient Texts
 
-# Getting Started
+Shrutam is a feel-good, shareable daily quotes app built with **React Native** and **TypeScript**. It delivers one powerful Sanskrit shlok every day—along with its meaning and source—creating a moment of reflection rooted in Indian mythology and philosophy.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## 🛠️ Tech Stack
 
-## Step 1: Start Metro
+- **React Native** 0.80.2 - Cross-platform mobile development
+- **TypeScript** 5.0.4 - Type-safe JavaScript
+- **React Navigation** - Navigation system
+- **Axios** - HTTP client for API calls
+- **AsyncStorage** - Local data persistence
+- **React Native Vector Icons** - Beautiful icons
+- **React Native Linear Gradient** - Gradient backgrounds
+- **React Native Share** - Social sharing functionality
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+### 🧘 Purpose
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+The goal is simple: offer users a mindful start to their day through handpicked quotes from sacred texts like the Bhagavad Gita, categorized and designed for daily engagement.
 
-```sh
-# Using npm
+### 🪔 Features
+
+- 📜 **Daily Quote View**
+  - Shows today's shlok with:
+    - Original Sanskrit shlok
+    - Source (e.g., Bhagavad Gita)
+    - Category (e.g., karma, dharma)
+    - Meaning in Hindi
+    - Meaning in English
+    - Date displayed in `DD MMM YYYY` format
+
+- 🕰 **Previous Quotes**
+  - Users can view earlier quotes from a calendar-style or scrollable list.
+  - No future dates or repeated entries.
+
+- 📤 **Smart Sharing**
+  - Share quotes as **beautiful images** with the same UI design
+  - Alternative text sharing for compatibility
+  - Choose between image 📷 or text 📝 sharing options
+
+### 🎨 UI & Design
+
+- Ethnic, mythical theme with traditional Indian aesthetics
+- Soft backgrounds with earthy tones (beige, sandal, maroon)
+- **Beautiful Kalam fonts** for authentic Indian typography
+- Clean, focused layout with emphasis on content
+
+---
+
+## 🚀 Development Setup
+
+### Prerequisites
+
+- Node.js >= 18
+- React Native CLI
+- Android Studio (for Android)
+- Xcode (for iOS, macOS only)
+
+### Installation
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd shrutam
+
+# Install dependencies
+npm install
+
+# iOS additional setup (macOS only)
+cd ios && pod install && cd ..
+```
+
+### Running the App
+
+```bash
+# Start Metro bundler
 npm start
 
-# OR using Yarn
-yarn start
-```
-
-## Step 2: Build and run your app
-
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
-
-```sh
-# Using npm
+# Run on Android
 npm run android
 
-# OR using Yarn
-yarn android
-```
-
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
-
-```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
+# Run on iOS (macOS only)
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+### TypeScript Development
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+This project is fully written in **TypeScript** for enhanced developer experience and type safety.
 
-## Step 3: Modify your app
+#### Key TypeScript Features:
+- **Strict Type Checking** - All files use strict TypeScript configuration
+- **Type-Safe API Calls** - All API responses are properly typed
+- **Interface Definitions** - Comprehensive interfaces for quotes, navigation, and theme
+- **Error Handling** - Custom typed error classes for better debugging
 
-Now that you have successfully run the app, let's make changes!
+#### Type Definitions Location:
+- `src/types/index.ts` - Main type definitions
+- `src/styles/theme.ts` - Theme and styling types
+- `src/services/api.ts` - API service types
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+#### Development Commands:
+```bash
+# Type checking
+npx tsc --noEmit
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+# Linting with TypeScript
+npm run lint
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+# Testing
+npm test
+```
 
-## Congratulations! :tada:
+---
 
-You've successfully run and modified your React Native App. :partying_face:
+## 🔗 API Integration
 
-### Now what?
+This app uses a custom backend hosted on Render and Supabase for data storage.
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+### 🔥 Endpoints Used
 
-# Troubleshooting
+#### ✅ Today's Quote
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+**Endpoint**  
+`GET https://shrutam-backend.onrender.com/api/quote/today`
 
-# Learn More
+**Response**
+```json
+{
+  "success": true,
+  "data": {
+    "id": "5c3372a8-6ff1-455b-8eb1-ffaa7015ccd1",
+    "shlok": "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन",
+    "source": "Bhagavad Gita",
+    "category": "karma",
+    "created_at": "2025-08-06T15:47:14.612823+00:00",
+    "meaning_hindi": "तुम्हारा अधिकार केवल कर्म करने में है, फल में नहीं।",
+    "meaning_english": "You have the right to perform your actions, but never to the fruits of those actions."
+  },
+  "message": "Today's quote retrieved successfully"
+}
+```
 
-To learn more about React Native, take a look at the following resources:
+---
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+## 📱 App Structure
+
+```
+shrutam/
+├── src/
+│   ├── components/          # Reusable UI components
+│   ├── screens/            # Main app screens
+│   │   ├── TodayScreen.tsx     # Today's quote display
+│   │   └── PreviousQuotesScreen.tsx  # Historical quotes
+│   ├── services/           # API and data services
+│   │   └── api.ts             # API client with TypeScript
+│   ├── styles/             # Theme and styling
+│   │   └── theme.ts           # App theme configuration
+│   ├── types/              # TypeScript definitions
+│   │   └── index.ts           # Main type exports
+│   └── utils/              # Utility functions
+├── App.tsx                 # Main app component
+└── index.js               # App entry point
+```
+
+## 🎯 Features Implemented
+
+- ✅ TypeScript integration with strict type checking
+- ✅ Beautiful Indian-themed UI with traditional aesthetics
+- ✅ **Authentic Kalam fonts** for Sanskrit and Indian typography
+- ✅ Daily quote fetching with offline caching
+- ✅ Previous quotes browsing with local storage
+- ✅ Social sharing functionality
+- ✅ **Enhanced Pull-to-Refresh** with vibration feedback and themed indicators  
+- ✅ **Image Sharing** - Share quotes as beautiful, branded images with the same UI
+- ✅ **Dual Sharing Options** - Choose between image and text sharing
+- ✅ Error handling and loading states with graceful fallbacks
+- ✅ Responsive design for various screen sizes
+- ✅ Environment variable configuration (.env support)
+- ✅ Offline-first architecture with data caching
+
+---
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+**Built with 🧡 for spiritual wisdom and daily reflection**

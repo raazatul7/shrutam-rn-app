@@ -1,28 +1,92 @@
 /**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
+ * Main App Component for Shrutam
+ * Daily Wisdom from Ancient Texts
  */
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { StatusBar, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+// Import screens
+import TodayScreen from './src/screens/TodayScreen';
+import PreviousQuotesScreen from './src/screens/PreviousQuotesScreen';
 
+// Import theme and types
+import { theme } from './src/styles/theme';
+import { RootTabParamList } from './src/types';
+
+const Tab = createBottomTabNavigator<RootTabParamList>();
+
+const App: React.FC = () => {
   return (
-    <View style={styles.container}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <NewAppScreen templateFileName="App.tsx" />
-    </View>
-  );
-}
+    <>
+      <StatusBar
+        barStyle="dark-content"
+        backgroundColor={theme.colors.background}
+      />
+      <NavigationContainer>
+        <Tab.Navigator
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }: { focused: boolean; color: string; size: number }) => {
+              let iconName: string;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});
+              if (route.name === 'Today') {
+                iconName = 'today';
+              } else if (route.name === 'Previous') {
+                iconName = 'history';
+              } else {
+                iconName = 'help'; // fallback
+              }
+
+              return <Icon name={iconName} size={size} color={color} />;
+            },
+            tabBarActiveTintColor: theme.colors.primary,
+            tabBarInactiveTintColor: theme.colors.onBackground,
+            tabBarStyle: {
+              backgroundColor: theme.colors.surface,
+              borderTopColor: theme.colors.primaryDark,
+              borderTopWidth: 1,
+              paddingTop: 5,
+              height: 80,
+            },
+            tabBarLabelStyle: {
+              fontSize: 12,
+              fontWeight: '600',
+              marginBottom: 5,
+            },
+            headerStyle: {
+              backgroundColor: theme.colors.background,
+              shadowColor: 'transparent',
+              elevation: 0,
+            },
+            headerTitleStyle: {
+              color: theme.colors.onBackground,
+              fontSize: 20,
+              fontWeight: 'bold',
+            },
+            headerTintColor: theme.colors.onBackground,
+          })}
+        >
+          <Tab.Screen
+            name="Today"
+            component={TodayScreen}
+            options={{
+              title: "📿 Today's Wisdom",
+            }}
+          />
+          <Tab.Screen
+            name="Previous"
+            component={PreviousQuotesScreen}
+            options={{
+              title: '📜 Recent Quotes',
+            }}
+          />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </>
+  );
+};
 
 export default App;
