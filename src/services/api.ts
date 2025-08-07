@@ -5,17 +5,47 @@
 
 import axios, { AxiosInstance } from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { BASE_URL, API_TIMEOUT } from '@env';
+import { environment, debugEnvironment } from '../config/environment';
 import { Quote, QuoteResponse, RecentQuotesResponse, CachedQuoteData, ApiError } from '../types';
+
+// Debug environment variables
+debugEnvironment();
 
 // Create axios instance with base configuration
 const apiClient: AxiosInstance = axios.create({
-  baseURL: BASE_URL,
-  timeout: parseInt(API_TIMEOUT, 10) || 10000,
+  baseURL: environment.BASE_URL,
+  timeout: environment.API_TIMEOUT,
   headers: {
     'Content-Type': 'application/json',
   },
 });
+
+// Add request interceptor for debugging
+apiClient.interceptors.request.use(
+  (config) => {
+    console.log('🌐 API Request:', config.method?.toUpperCase(), config.url);
+    console.log('📍 Base URL:', environment.BASE_URL);
+    return config;
+  },
+  (error) => {
+    console.error('❌ Request Error:', error);
+    return Promise.reject(error);
+  }
+);
+
+// Add response interceptor for debugging
+apiClient.interceptors.response.use(
+  (response) => {
+    console.log('✅ API Response:', response.status, response.config.url);
+    return response;
+  },
+  (error) => {
+    console.error('❌ Response Error:', error.message);
+    console.error('🔗 URL:', error.config?.url);
+    console.error('📊 Status:', error.response?.status);
+    return Promise.reject(error);
+  }
+);
 
 /**
  * Fetches today's quote from the API
@@ -43,7 +73,16 @@ export const getTodaysQuote = async (): Promise<Quote> => {
       );
     }
   } catch (error: any) {
-    console.error('Error fetching today\'s quote:', error);
+    console.error('❌ Error fetching today\'s quote:', error);
+    console.error('🔗 Attempted URL:', `${environment.BASE_URL}/quote/today`);
+    console.error('📱 Platform: Android Emulator');
+    
+    // Check if it's a network connectivity issue
+    if (error.code === 'NETWORK_ERROR' || error.message?.includes('Network Error')) {
+      console.error('🌐 Network connectivity issue detected');
+      console.error('💡 Make sure your API server is running on port 3000');
+      console.error('💡 For Android emulator, use 10.0.2.2 instead of localhost');
+    }
     
     // Try to return cached quote if API fails
     try {
@@ -51,6 +90,7 @@ export const getTodaysQuote = async (): Promise<Quote> => {
       if (cached) {
         const { data, date }: CachedQuoteData = JSON.parse(cached);
         if (date === new Date().toDateString()) {
+          console.log('📦 Returning cached quote');
           return data;
         }
       }
