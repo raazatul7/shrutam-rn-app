@@ -3,11 +3,12 @@
  * Daily Wisdom from Ancient Texts
  */
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { StatusBar, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import mobileAds from 'react-native-google-mobile-ads';
 
 // Import screens
 import TodayScreen from './src/screens/TodayScreen';
@@ -20,6 +21,22 @@ import { RootTabParamList } from './src/types';
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
 const App: React.FC = () => {
+  /**
+   * Initialize Google Mobile Ads SDK
+   */
+  useEffect(() => {
+    const initializeAds = async () => {
+      try {
+        await mobileAds().initialize();
+        console.log('Google Mobile Ads SDK initialized successfully');
+      } catch (error) {
+        console.error('Failed to initialize Google Mobile Ads SDK:', error);
+      }
+    };
+
+    initializeAds();
+  }, []);
+
   return (
     <>
       <StatusBar

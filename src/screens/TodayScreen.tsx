@@ -23,6 +23,7 @@ import { getTodaysQuote, formatDate, cacheQuote } from '../services/api';
 import { theme } from '../styles/theme';
 import { Quote, TabScreenProps } from '../types';
 import ShareableQuoteCard from '../components/ShareableQuoteCard';
+import BannerAdComponent from '../components/BannerAd';
 
 type Props = TabScreenProps<'Today'>;
 
@@ -266,6 +267,9 @@ Shared from Shrutam - Daily Wisdom from Ancient Texts`;
         {/* Bottom Spacing */}
         <View style={styles.bottomSpacing} />
       </ScrollView>
+
+      {/* Banner Ad at Bottom */}
+      <BannerAdComponent />
 
       {/* Hidden Shareable Card for Image Capture */}
       <View style={styles.hiddenContainer}>

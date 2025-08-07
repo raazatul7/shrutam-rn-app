@@ -1,4 +1,10 @@
 {
   "name": "shrutam",
-  "displayName": "Shrutam"
+  "displayName": "Shrutam",
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-6350541569686511~8025312093",
+    "ios_app_id": "ca-app-pub-6350541569686511~3718385518",
+    "delay_app_measurement_init": false,
+    "user_tracking_usage_description": "This identifier will be used to deliver personalized ads to you."
+  }
 }
