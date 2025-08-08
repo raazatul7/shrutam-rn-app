@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "739317939118",
+    "project_id": "shrutam-14509",
+    "storage_bucket": "shrutam-14509.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:739317939118:android:8517f12b8a3cf3a97ee63f",
+        "android_client_info": {
+          "package_name": "com.shrutam"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBauA47bkoUp2OKpQfIoL442BmVdnogxS0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
